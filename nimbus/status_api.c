@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include <stddef.h>
+#include <stdio.h>
 
 typedef struct {
   uint8_t* decoded;
@@ -19,14 +20,14 @@ typedef void (*received_msg_handler)(received_nessage* msg);
 void nimbus_subscribe(const char* channel, received_msg_handler msg);
 
 void print_msg(received_nessage* msg) {
-  printf("Got message! %ld", msg->decodedLen);
+  printf("Got message! %ld\n", msg->decodedLen);
 }
 
 int main(int argc, char* argv[]) {
   NimMain();
   nimbus_start(30303);
 
-  nimbus_subscribe("#status-test-c", print_msg);
+  nimbus_subscribe("status-test-c", print_msg);
 
   while(1) {
     nimbus_poll();
