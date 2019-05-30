@@ -5,6 +5,11 @@
 #  * MIT license ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
 # at your option. This file may not be copied, modified, or distributed except according to those terms.
 
+import threadpool
+
+# AppVeyor may go out of memory with the default of 4
+setMinPoolSize(2)
+
 import  ./test_code_stream,
         ./test_gas_meter,
         ./test_memory,
