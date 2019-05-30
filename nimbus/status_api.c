@@ -48,11 +48,11 @@ int main(int argc, char* argv[]) {
 
     if (lastmsg + 1 <= time(NULL)) {
       lastmsg = time(NULL);
-      printf("Posting hello\n");
-
       char buf[4096];
       snprintf(buf, 4095,
-        "[\"~#c4\",[\"%s\",\"text/plain\",\"~:public-group-user-message\",154604971756901,1546049717568,[\"^ \",\"~:chat-id\",\"%s\",\"~:text\",\"%s\"]]])", msg, channel, msg);
+        "[\"~#c4\",[\"%s\",\"text/plain\",\"~:public-group-user-message\",%ld,%ld,[\"^ \",\"~:chat-id\",\"%s\",\"~:text\",\"%s\"]]]", msg, lastmsg * 1000, lastmsg, channel, msg);
+
+      printf("Posting %s\n", buf);
       nimbus_post(buf);
     }
     nimbus_poll();
