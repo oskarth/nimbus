@@ -155,7 +155,6 @@ proc nimbus_post(payload: cstring) {.exportc.} =
                            ttl = 20,
                            topic = topic,
                            payload = npayload,
-                           powTime = 0.5,
                            powTarget = 0.002)
 
 proc nimbus_add_peer(nodeId: cstring) {.exportc.} =

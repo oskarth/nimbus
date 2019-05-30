@@ -51,7 +51,7 @@ int main(int argc, char* argv[]) {
       lastmsg = time(NULL);
       char buf[4096];
       snprintf(buf, 4095,
-        "[\"~#c4\",[\"%s\",\"text/plain\",\"~:public-group-user-message\",%ld,%ld,[\"^ \",\"~:chat-id\",\"%s\",\"~:text\",\"%s\"]]]", msg, lastmsg * 1000, lastmsg, channel, msg);
+        "[\"~#c4\",[\"%s\",\"text/plain\",\"~:public-group-user-message\",%ld,%ld,[\"^ \",\"~:chat-id\",\"%s\",\"~:text\",\"%s\"]]]", msg, lastmsg * 1000 * 100, lastmsg * 1000, channel, msg);
 
       printf("Posting %s\n", buf);
       nimbus_post(buf);
