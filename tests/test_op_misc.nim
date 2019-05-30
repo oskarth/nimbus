@@ -1,10 +1,11 @@
 import
-  macro_assembler, unittest, macros, strutils,
+  macro_assembler, unittest2, macros, strutils,
   byteutils, eth/common, ../nimbus/db/state_db,
   ../nimbus/db/db_chain, ranges
 
 suite "Misc Opcodes":
-  let (blockNumber, chainDB) = initDatabase()
+  setup:
+    let (blockNumber, chainDB) = initDatabase()
 
   assembler: # LOG0 OP
     title: "Log0"

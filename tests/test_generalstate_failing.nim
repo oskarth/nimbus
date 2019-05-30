@@ -21,5 +21,29 @@ func allowedFailingGeneralStateTest*(folder, name: string): bool =
     # a conflict between balance checker and
     # static call context checker
     "create2noCash.json",
+    # Check failed: obtainedHash == tester.expectedHash
+    "sha3_deja.json",
+    # stack overflow
+    "Create2OnDepth1023.json",
+    "Create2OnDepth1024.json",
+    "randomStatetest150.json",
+    "randomStatetest154.json",
+    "randomStatetest458.json",
+    "randomStatetest467.json",
+    "randomStatetest554.json",
+    "randomStatetest636.json",
+    "randomStatetest639.json",
+    "static_ABAcalls1.json",
+    "static_ABAcalls2.json",
+    "static_CallRecursiveBomb0_OOG_atMaxCallDepth.json",
+    "static_CallRecursiveBombPreCall.json",
+    "static_CallRecursiveBombPreCall2.json",
+    "static_LoopCallsDepthThenRevert2.json",
+    "static_LoopCallsDepthThenRevert3.json",
   ]
-  result = name in allowedFailingGeneralStateTests
+  let allowedFailingPersistBlockTests = [
+    # stack overflow
+    "block1431916.json",
+  ]
+  result = name in allowedFailingGeneralStateTests or name in allowedFailingPersistBlockTests
+

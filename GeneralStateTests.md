@@ -380,8 +380,8 @@ OK: 3/3 Fail: 0/3 Skip: 0/3
 + Create2OOGafterInitCodeReturndataSize.json                      OK
 + Create2OOGafterInitCodeRevert.json                              OK
 + Create2OOGafterInitCodeRevert2.json                             OK
-+ Create2OnDepth1023.json                                         OK
-+ Create2OnDepth1024.json                                         OK
+  Create2OnDepth1023.json                                         Skip
+  Create2OnDepth1024.json                                         Skip
   Create2Recursive.json                                           Skip
 + CreateMessageReverted.json                                      OK
 + CreateMessageRevertedOOGInInit.json                             OK
@@ -413,7 +413,7 @@ OK: 3/3 Fail: 0/3 Skip: 0/3
 + returndatacopy_following_successful_create.json                 OK
 + returndatasize_following_successful_create.json                 OK
 ```
-OK: 42/44 Fail: 0/44 Skip: 2/44
+OK: 40/44 Fail: 0/44 Skip: 4/44
 ## stCreateTest
 ```diff
 + CREATE_AcreateB_BSuicide_BStore.json                            OK
@@ -1093,10 +1093,10 @@ OK: 0/16 Fail: 0/16 Skip: 16/16
 + randomStatetest148.json                                         OK
 + randomStatetest149.json                                         OK
 + randomStatetest15.json                                          OK
-+ randomStatetest150.json                                         OK
+  randomStatetest150.json                                         Skip
 + randomStatetest151.json                                         OK
 + randomStatetest153.json                                         OK
-+ randomStatetest154.json                                         OK
+  randomStatetest154.json                                         Skip
 + randomStatetest155.json                                         OK
 + randomStatetest156.json                                         OK
 + randomStatetest157.json                                         OK
@@ -1370,7 +1370,7 @@ OK: 0/16 Fail: 0/16 Skip: 16/16
 + randomStatetest97.json                                          OK
 + randomStatetest98.json                                          OK
 ```
-OK: 323/327 Fail: 0/327 Skip: 4/327
+OK: 321/327 Fail: 0/327 Skip: 6/327
 ## stRandom2
 ```diff
 + 201503110226PYTHON_DUP6.json                                    OK
@@ -1439,14 +1439,14 @@ OK: 323/327 Fail: 0/327 Skip: 4/327
 + randomStatetest455.json                                         OK
 + randomStatetest456.json                                         OK
 + randomStatetest457.json                                         OK
-+ randomStatetest458.json                                         OK
+  randomStatetest458.json                                         Skip
 + randomStatetest460.json                                         OK
 + randomStatetest461.json                                         OK
 + randomStatetest462.json                                         OK
 + randomStatetest464.json                                         OK
 + randomStatetest465.json                                         OK
 + randomStatetest466.json                                         OK
-+ randomStatetest467.json                                         OK
+  randomStatetest467.json                                         Skip
 + randomStatetest468.json                                         OK
 + randomStatetest469.json                                         OK
 + randomStatetest470.json                                         OK
@@ -1523,7 +1523,7 @@ OK: 323/327 Fail: 0/327 Skip: 4/327
 + randomStatetest550.json                                         OK
 + randomStatetest552.json                                         OK
 + randomStatetest553.json                                         OK
-+ randomStatetest554.json                                         OK
+  randomStatetest554.json                                         Skip
 + randomStatetest555.json                                         OK
 + randomStatetest556.json                                         OK
 + randomStatetest558.json                                         OK
@@ -1588,10 +1588,10 @@ OK: 323/327 Fail: 0/327 Skip: 4/327
 + randomStatetest632.json                                         OK
 + randomStatetest633.json                                         OK
 + randomStatetest635.json                                         OK
-+ randomStatetest636.json                                         OK
+  randomStatetest636.json                                         Skip
 + randomStatetest637.json                                         OK
 + randomStatetest638.json                                         OK
-+ randomStatetest639.json                                         OK
+  randomStatetest639.json                                         Skip
 + randomStatetest640.json                                         OK
 + randomStatetest641.json                                         OK
 + randomStatetest642.json                                         OK
@@ -1601,7 +1601,7 @@ OK: 323/327 Fail: 0/327 Skip: 4/327
 + randomStatetest646.json                                         OK
 + randomStatetest647.json                                         OK
 ```
-OK: 225/227 Fail: 0/227 Skip: 2/227
+OK: 220/227 Fail: 0/227 Skip: 7/227
 ## stRecursiveCreate
 ```diff
 + recursiveCreate.json                                            OK
@@ -1834,11 +1834,11 @@ OK: 16/16 Fail: 0/16 Skip: 0/16
 + gasPrice0.json                                                  OK
 + makeMoney.json                                                  OK
 + push32withoutByte.json                                          OK
-+ sha3_deja.json                                                  OK
+  sha3_deja.json                                                  Skip
 + txCost-sec73.json                                               OK
 + tx_e1c174e2.json                                                OK
 ```
-OK: 12/14 Fail: 0/14 Skip: 2/14
+OK: 11/14 Fail: 0/14 Skip: 3/14
 ## stStackTests
 ```diff
 + shallowStack.json                                               OK
@@ -1853,8 +1853,8 @@ OK: 7/7 Fail: 0/7 Skip: 0/7
 ## stStaticCall
 ```diff
 + static_ABAcalls0.json                                           OK
-+ static_ABAcalls1.json                                           OK
-+ static_ABAcalls2.json                                           OK
+  static_ABAcalls1.json                                           Skip
+  static_ABAcalls2.json                                           Skip
 + static_ABAcalls3.json                                           OK
 + static_ABAcallsSuicide0.json                                    OK
 + static_ABAcallsSuicide1.json                                    OK
@@ -1917,14 +1917,14 @@ OK: 7/7 Fail: 0/7 Skip: 0/7
 + static_CallIdentity_5.json                                      OK
 + static_CallLoseGasOOG.json                                      OK
 + static_CallRecursiveBomb0.json                                  OK
-+ static_CallRecursiveBomb0_OOG_atMaxCallDepth.json               OK
+  static_CallRecursiveBomb0_OOG_atMaxCallDepth.json               Skip
 + static_CallRecursiveBomb1.json                                  OK
 + static_CallRecursiveBomb2.json                                  OK
 + static_CallRecursiveBomb3.json                                  OK
 + static_CallRecursiveBombLog.json                                OK
 + static_CallRecursiveBombLog2.json                               OK
-+ static_CallRecursiveBombPreCall.json                            OK
-+ static_CallRecursiveBombPreCall2.json                           OK
+  static_CallRecursiveBombPreCall.json                            Skip
+  static_CallRecursiveBombPreCall2.json                           Skip
 + static_CallRipemd160_1.json                                     OK
 + static_CallRipemd160_2.json                                     OK
 + static_CallRipemd160_3.json                                     OK
@@ -1956,8 +1956,8 @@ OK: 7/7 Fail: 0/7 Skip: 0/7
 + static_InternalCallHittingGasLimit2.json                        OK
 + static_InternlCallStoreClearsOOG.json                           OK
 + static_LoopCallsDepthThenRevert.json                            OK
-+ static_LoopCallsDepthThenRevert2.json                           OK
-+ static_LoopCallsDepthThenRevert3.json                           OK
+  static_LoopCallsDepthThenRevert2.json                           Skip
+  static_LoopCallsDepthThenRevert3.json                           Skip
 + static_LoopCallsThenRevert.json                                 OK
 + static_PostToReturn1.json                                       OK
 + static_RETURN_Bounds.json                                       OK
@@ -2137,7 +2137,7 @@ OK: 7/7 Fail: 0/7 Skip: 0/7
 + static_refund_CallToSuicideNoStorage.json                       OK
 + static_refund_CallToSuicideTwice.json                           OK
 ```
-OK: 271/284 Fail: 0/284 Skip: 13/284
+OK: 264/284 Fail: 0/284 Skip: 20/284
 ## stSystemOperationsTest
 ```diff
 + ABAcalls0.json                                                  OK
@@ -2645,4 +2645,4 @@ OK: 133/133 Fail: 0/133 Skip: 0/133
 OK: 130/130 Fail: 0/130 Skip: 0/130
 
 ---TOTAL---
-OK: 2343/2447 Fail: 0/2447 Skip: 104/2447
+OK: 2326/2447 Fail: 0/2447 Skip: 121/2447

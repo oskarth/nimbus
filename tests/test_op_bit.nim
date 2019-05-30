@@ -1,7 +1,8 @@
-import macro_assembler, unittest
+import macro_assembler, unittest2
 
 suite "Bitwise Opcodes":
-  let (blockNumber, chainDB) = initDatabase()
+  setup:
+    let (blockNumber, chainDB) = initDatabase()
 
   assembler: # AND OP
     title: "AND_1"

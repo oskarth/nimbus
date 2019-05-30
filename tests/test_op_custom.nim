@@ -1,20 +1,21 @@
 import
-  macro_assembler, unittest, macros, strutils,
+  macro_assembler, unittest2, macros, strutils,
   byteutils, eth/common, ../nimbus/db/state_db,
   ../nimbus/db/db_chain, ranges
 
 suite "Custom Opcodes Test":
-  let (blockNumber, chainDB) = initDatabase()
+  setup:
+    let (blockNumber, chainDB) = initDatabase()
 
-  var acc: EthAddress
-  hexToByteArray("0xc669eaad75042be84daaf9b461b0e868b9ac1871", acc)
-  var
-    parent = chainDB.getBlockHeader(blockNumber - 1)
-    stateDB = newAccountStateDB(chainDB.db, parent.stateRoot, false)
+    var acc: EthAddress
+    hexToByteArray("0xc669eaad75042be84daaf9b461b0e868b9ac1871", acc)
+    var
+      parent = chainDB.getBlockHeader(blockNumber - 1)
+      stateDB = newAccountStateDB(chainDB.db, parent.stateRoot, false)
 
-  stateDB.setBalance(acc, 1000.u256)
-  parent.stateRoot = stateDB.rootHash
-  chainDB.setHead(parent, true)
+    stateDB.setBalance(acc, 1000.u256)
+    parent.stateRoot = stateDB.rootHash
+    chainDB.setHead(parent, true)
 
   assembler: # CALLDATASIZE OP
     title: "CALLDATASIZE_1"
