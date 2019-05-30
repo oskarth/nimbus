@@ -60,24 +60,24 @@ proc subscribeChannel(
                                           topics = @[topic]),
                               handler)
 
-proc handler(msg: ReceivedMessage) {.gcsafe.} =
-  try:
-    # ["~#c4",["dcasdc","text/plain","~:public-group-user-message",
-    #          154604971756901,1546049717568,[
-    #             "^ ","~:chat-id","nimbus-test","~:text","dcasdc"]]]
-    let
-      src =
-        if msg.decoded.src.isSome(): $msg.decoded.src.get()
-        else: ""
-      payload = cast[string](msg.decoded.payload)
-      data = parseJson(cast[string](msg.decoded.payload))
-      channel = data.elems[1].elems[5].elems[2].str
-      time = $fromUnix(data.elems[1].elems[4].num div 1000)
-      message = data.elems[1].elems[0].str
+# proc handler(msg: ReceivedMessage) {.gcsafe.} =
+#   try:
+#     # ["~#c4",["dcasdc","text/plain","~:public-group-user-message",
+#     #          154604971756901,1546049717568,[
+#     #             "^ ","~:chat-id","nimbus-test","~:text","dcasdc"]]]
+#     let
+#       src =
+#         if msg.decoded.src.isSome(): $msg.decoded.src.get()
+#         else: ""
+#       payload = cast[string](msg.decoded.payload)
+#       data = parseJson(cast[string](msg.decoded.payload))
+#       channel = data.elems[1].elems[5].elems[2].str
+#       time = $fromUnix(data.elems[1].elems[4].num div 1000)
+#       message = data.elems[1].elems[0].str
 
-    info "adding", full=(cast[string](msg.decoded.payload))
-  except:
-    notice "no luck parsing", message=getCurrentExceptionMsg()
+#     info "adding", full=(cast[string](msg.decoded.payload))
+#   except:
+#     notice "no luck parsing", message=getCurrentExceptionMsg()
 
 proc nimbus_start(port: uint16 = 30303) {.exportc.} =
   let address = Address(
@@ -118,16 +118,19 @@ type
     hash*: Hash
 
 proc nimbus_subscribe(channel: cstring, handler: proc (msg: ptr CReceivedMessage) {.gcsafe, cdecl.}) {.exportc.} =
-  proc c_handler(msg: ReceivedMessage) =
-    var cmsg = CReceivedMessage(
-      decoded: unsafeAddr msg.decoded.payload[0],
-      decodedLen: csize msg.decoded.payload.len(),
-      timestamp: msg.timestamp
-    )
+  if handler.isNil:
+    subscribeChannel($channel, nil)
+  else:
+    proc c_handler(msg: ReceivedMessage) =
+      var cmsg = CReceivedMessage(
+        decoded: unsafeAddr msg.decoded.payload[0],
+        decodedLen: csize msg.decoded.payload.len(),
+        timestamp: msg.timestamp
+      )
 
-    handler(addr cmsg)
+      handler(addr cmsg)
 
-  subscribeChannel($channel, c_handler)
+    subscribeChannel($channel, c_handler)
 
 proc nimbus_post(payload: cstring) {.exportc.} =
   let encPrivateKey = initPrivateKey("5dc5381cae54ba3174dc0d46040fe11614d0cc94d41185922585198b4fcef9d3")

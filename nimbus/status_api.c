@@ -29,6 +29,10 @@ void print_msg(received_nessage* msg) {
   printf("Got message! %ld\n", msg->decodedLen);
 }
 
+const char* channel = "status-test-c";
+
+const char* msg = "testing message";
+
 int main(int argc, char* argv[]) {
   time_t lastmsg;
 
@@ -45,7 +49,11 @@ int main(int argc, char* argv[]) {
     if (lastmsg + 1 <= time(NULL)) {
       lastmsg = time(NULL);
       printf("Posting hello\n");
-      nimbus_post("hello");
+
+      char buf[4096];
+      snprintf(buf, 4095,
+        "[\"~#c4\",[\"%s\",\"text/plain\",\"~:public-group-user-message\",154604971756901,1546049717568,[\"^ \",\"~:chat-id\",\"%s\",\"~:text\",\"%s\"]]])", msg, channel, msg);
+      nimbus_post(buf);
     }
     nimbus_poll();
   }
