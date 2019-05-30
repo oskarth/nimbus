@@ -15,7 +15,6 @@ import
 
 let channel: string = "status-test-c"
 
-
 proc `$`*(digest: SymKey): string =
   for c in digest: result &= hexChar(c.byte)
 
@@ -129,7 +128,11 @@ proc nimbus_subscribe(channel: cstring, handler: proc (msg: ptr CReceivedMessage
       var cmsg = CReceivedMessage(
         decoded: unsafeAddr msg.decoded.payload[0],
         decodedLen: csize msg.decoded.payload.len(),
-        timestamp: msg.timestamp
+        timestamp: msg.timestamp,
+        ttl: msg.ttl,
+        topic: msg.topic,
+        pow: msg.pow,
+        hash: msg.hash
       )
 
       handler(addr cmsg)
