@@ -157,3 +157,10 @@ proc nimbus_post(payload: cstring) {.exportc.} =
                            payload = npayload,
                            powTime = 0.5,
                            powTarget = 0.002)
+
+proc nimbus_add_peer(nodeId: cstring) {.exportc.} =
+  var whisperENode: ENode
+  discard initENode($nodeId, whisperENode)
+  var whisperNode = newNode(whisperENode)
+
+  asyncCheck node.peerPool.connectToNode(whisperNode)

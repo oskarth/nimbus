@@ -20,6 +20,7 @@ void NimMain();
 void nimbus_start(uint16_t port);
 void nimbus_poll();
 void nimbus_post(const char* payload);
+void nimbus_add_peer(const char* nodeId);
 
 typedef void (*received_msg_handler)(received_nessage* msg);
 
