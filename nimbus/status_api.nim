@@ -13,6 +13,9 @@ import
   eth/keys, eth/rlp, eth/p2p, eth/p2p/rlpx_protocols/[whisper_protocol],
   eth/p2p/[discovery, enode, peer_pool], chronicles
 
+let channel: string = "status-test-c"
+
+
 proc `$`*(digest: SymKey): string =
   for c in digest: result &= hexChar(c.byte)
 
@@ -125,3 +128,25 @@ proc nimbus_subscribe(channel: cstring, handler: proc (msg: ptr CReceivedMessage
     handler(addr cmsg)
 
   subscribeChannel($channel, c_handler)
+
+proc nimbus_post(payload: cstring) {.exportc.} =
+  let encPrivateKey = initPrivateKey("5dc5381cae54ba3174dc0d46040fe11614d0cc94d41185922585198b4fcef9d3")
+  let encPublicKey = encPrivateKey.getPublicKey()
+
+  var ctx: HMAC[sha256]
+  var symKey: SymKey
+  var npayload = cast[Bytes]($payload)
+  discard ctx.pbkdf2(channel, "", 65356, symKey)
+
+  let channelHash = digest(keccak256, channel)
+  var topic: array[4, byte]
+  for i in 0..<4:
+    topic[i] = channelHash.data[i]
+
+  discard node.postMessage(symKey = some(symKey),
+                           src = some(encPrivateKey),
+                           ttl = 20,
+                           topic = topic,
+                           payload = npayload,
+                           powTime = 0.5,
+                           powTarget = 0.002)

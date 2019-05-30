@@ -1,6 +1,8 @@
 #include <stdint.h>
 #include <stddef.h>
 #include <stdio.h>
+#include <unistd.h>
+#include <time.h>
 
 typedef struct {
   uint8_t* decoded;
@@ -12,8 +14,12 @@ typedef struct {
   uint8_t hash[32];
 } received_nessage;
 
+
+void NimMain();
+
 void nimbus_start(uint16_t port);
 void nimbus_poll();
+void nimbus_post(const char* payload);
 
 typedef void (*received_msg_handler)(received_nessage* msg);
 
@@ -24,12 +30,23 @@ void print_msg(received_nessage* msg) {
 }
 
 int main(int argc, char* argv[]) {
+  time_t lastmsg;
+
   NimMain();
   nimbus_start(30303);
 
   nimbus_subscribe("status-test-c", print_msg);
 
+  lastmsg = time(NULL);
+
   while(1) {
+    usleep(1);
+
+    if (lastmsg + 1 <= time(NULL)) {
+      lastmsg = time(NULL);
+      printf("Posting hello\n");
+      nimbus_post("hello");
+    }
     nimbus_poll();
   }
 }
