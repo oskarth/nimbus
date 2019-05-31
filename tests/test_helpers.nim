@@ -277,6 +277,7 @@ macro jsonTest*(s: static[string], handler: untyped): untyped =
       raw.add("\n---TOTAL---\n")
       raw.add("OK: $1/$4 Fail: $2/$4 Skip: $3/$4\n" % [$okCountTotal, $failCountTotal, $skipCountTotal, $sumTotal])
       writeFile(`s` & ".md", raw)
+      status.clear()
 
 func ethAddressFromHex*(s: string): EthAddress = hexToByteArray(s, result)
 
