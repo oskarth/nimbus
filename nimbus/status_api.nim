@@ -15,6 +15,8 @@ import
 
 let channel: string = "status-test-c"
 
+echo "***Inside nim status"
+
 proc `$`*(digest: SymKey): string =
   for c in digest: result &= hexChar(c.byte)
 
