@@ -11,11 +11,6 @@ import
   ./test_helpers, ../nimbus/db/[db_chain, storage_types], ../nimbus/[tracer, vm_types],
   ../nimbus/p2p/chain
 
-proc testFixture(node: JsonNode, testStatusIMPL: var TestStatus)
-
-suite "persist block json tests":
-  jsonTest("PersistBlockTests", testFixture)
-
 # use tracerTestGen.nim to generate additional test data
 proc testFixture(node: JsonNode, testStatusIMPL: var TestStatus) =
   var
@@ -42,3 +37,7 @@ proc testFixture(node: JsonNode, testStatusIMPL: var TestStatus) =
   chainDB.setHead(parent, true)
   let validationResult = chain.persistBlocks(headers, bodies)
   check validationResult == ValidationResult.OK
+
+suite "persist block json tests":
+  jsonTest("PersistBlockTests", testFixture)
+
